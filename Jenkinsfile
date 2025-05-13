@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     tools {
-        gradle 'Gradle' // Must match the Jenkins tool name exactly
-        
+        gradle 'Gradle'
+        jdk 'JDK'
     }
 
     environment {
-        JAVA_HOME = tool 'JDK'
-        PATH = "${tool 'Gradle'}/bin:${env.JAVA_HOME}/bin:${env.PATH}"
+        JAVA_HOME = tool(name: 'JDK', type: 'hudson.model.JDK')
+        PATH = "${tool 'Gradle'}/bin:${JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
@@ -34,15 +34,6 @@ pipeline {
             steps {
                 sh 'gradle run'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and deployment successful!'
-        }
-        failure {
-            echo 'Build failed!'
         }
     }
 }
