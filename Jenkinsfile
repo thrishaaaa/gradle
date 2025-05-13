@@ -5,6 +5,10 @@ pipeline {
         gradle 'Gradle'  // Ensure this matches the name configured in Jenkins
         jdk 'JDK'
     }
+     environment {
+        JAVA_HOME = tool 'JDK'
+        PATH = "${tool 'Gradle'}/bin:${env.JAVA_HOME}/bin:${env.PATH}"
+    }
     stages {
         stage('Checkout') {
             steps {
