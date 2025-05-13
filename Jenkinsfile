@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         gradle 'Gradle' // Must match the Jenkins tool name exactly
-        jdk 'JDK'       // Must match the Jenkins JDK name exactly
+        
     }
 
     environment {
